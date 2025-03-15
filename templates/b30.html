@@ -11,10 +11,9 @@
 </head>
 
 <body >
-    <div id="mainCapture" style="transform-origin: 0px 0px;  height: 55.6235px;" >
+    <div id="mainCapture" style="height: 50px">
         <div id="container">
             <div id="background" style="background-image: url(static/b30_image/Background_scenery_Chap9.jpg); height: 3400px;">
-                <img id="background-image" src="static/b30_image/Background_scenery_Chap9.jpg" style="height: 3400px;">
             </div>
             <h1 id="notice" hidden="hidden">若页面显示不完整，请刷新几次</h1>
             <div id="info-display">
@@ -116,7 +115,7 @@
         <div class="song-name">${best_rated_scores[i]['title']}</div>
         <div class="song-score">${best_rated_scores[i]['score']}</div>
         <div class="song-items">
-        </div><img class="song-ranking-image" src="https://smartrte.github.io/img/rank/${getString(best_rated_scores[i]['score'])}.png">
+        </div><img class="song-ranking-image" src="static/b30_image/rank/${getString(best_rated_scores[i]['score'])}.png">
     </div>`
         }
         console.log(best_show_scores)
@@ -170,6 +169,9 @@
             scale: 2,
             logging: false
         };
+        mainCapture=document.querySelector("#mainCapture")
+        mainCapture.style.height="3600px"
+        mainCapture.style.backgroundImage="url(static/b30_image/Background_scenery_Chap9.jpg)"
 
 
         html2canvas(document.body, options).then(canvas => {
@@ -184,6 +186,8 @@
         }).catch(err => {
             console.error('截图失败:', err);
         });
+        document.querySelector("#mainCapture").style.height="50px"
+
     }
 
 
