@@ -34,3 +34,7 @@ def modify(file):
         temp["difficulty"] = diff[str(temp["difficulty"])]
 
     return file
+
+
+if __name__ == '__main__':
+    print(modify(get_file()))
