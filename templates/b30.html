@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>b30图片生成</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        @import "static/b30.css";
+    </style>
+</head>
+
+<body >
+    <div id="mainCapture" style="transform-origin: 0px 0px;  height: 55.6235px;" >
+        <div id="container">
+            <div id="background" style="background-image: url(static/b30_image/Background_scenery_Chap9.jpg); height: 3400px;">
+                <img id="background-image" src="static/b30_image/Background_scenery_Chap9.jpg" style="height: 3400px;">
+            </div>
+            <h1 id="notice" hidden="hidden">若页面显示不完整，请刷新几次</h1>
+            <div id="info-display">
+                <div id="player-info">
+
+                    <div id="avatar">
+                        <div id="iconblur">
+                            <img src="static/b30_image/blur.png">
+                        </div>
+                        <div id="icon" onclick="displayWindow('setting-window')">
+                            <img src="static/b30_image/2u_icon.webp">
+                        </div>
+                        <div id="potential-container">
+                            <div id="potential">
+                                <img id="potential-frame" src="static/b30_image/rating_4.png">
+                                <div id="potential-value"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="user-name-container">
+                    <img id="user-course-dan" src="static/b30_image/6.png">
+                    <div id="user-name">Hikari</div>
+                </div>
+                <div id="user-id-container">
+                    <img id="id-course-dan" src="static/b30_image/6.png">
+                    <div id="user-id">ID : <span>114 514 616</span></div>
+                </div>
+                <div id="ptt-display" onclick="displayAccuratePtt()">
+                    <div id="ptt-max">Max : <span></span></div>
+                    <div id="ptt-b30">B30 : <span></span></div>
+                    <div id="ptt-r10">R10 : <span></span></div>
+                    <div><span></span></div>
+                </div>
+                <div class="spliter" id="spliter-best30">
+                    <img class="spliter-image" src="static/b30_image/divider.png">
+                    <img id="spliter-text-best30" src="static/b30_image/best30.png">
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- 显示 b30 数据 主体在js内 -->
+        <div id="b30-data">
+            <div id="spliter-overflow" class="spliter"><img id="spliter-image-overflow" class="spliter-image"
+                    src="static/b30_image/divider.png"><img id="spliter-text-overflow"
+                    src="static/b30_image/overflow.png"></div>
+        </div>
+
+        <div id="copyright">
+            <span>自定义内容@</span>
+            <span>2025/03/14 22:37:12</span>
+        </div>
+    </div>
+</body>
+<script src="static/http_cdn.jsdelivr.net_npm_axios_dist_axios.js"></script>
+<script src="static/imageToBase64.js"></script>
+
+<script>
+    function getString(value) {
+        if (value > 10000000) {
+            return 'PM';
+        } else if (value > 9900000) {
+            return 'EX+';
+        } else if (value > 9800000) {
+            return 'EX';
+        } else if (value > 9500000) {
+            return 'AA';
+        } else if (value > 9200000) {
+            return 'A';
+        } else {
+            return 'B';
+        }
+    }
+    axios(
+        {
+            method: 'GET',
+            url: '/sheet',
+        }
+    ).then(response => {
+        const best_rated_scores = response.data.best_rated_scores
+        const recent_rated_scores = response.data.recent_rated_scores
+        console.log(recent_rated_scores)
+        let best_show_scores = ""
+        let recent_show_scores = ""
+        for (let i = 0; i < best_rated_scores.length; i++) {
+            best_show_scores += `
+    <div class="song-result-unit future" id="${best_rated_scores[i]['title']}">
+        <div onclick="modifyPlayResult(${i})" class="song-illustration-container"><img class="song-illustration"
+                src="https://webassets.lowiro.com/${best_rated_scores[i]['bg']}.jpg?v=323"></div>
+        <div class="song-information">
+            <div class="song-playrating">${best_rated_scores[i]['rating']}</div>
+            <div class="song-constant">${best_rated_scores[i]['difficulty']}</div>
+            <div class="song-rank">#${i + 1}</div>
+        </div>
+        <div class="song-name">${best_rated_scores[i]['title']}</div>
+        <div class="song-score">${best_rated_scores[i]['score']}</div>
+        <div class="song-items">
+        </div><img class="song-ranking-image" src="https://smartrte.github.io/img/rank/${getString(best_rated_scores[i]['score'])}.png">
+    </div>`
+        }
+        console.log(best_show_scores)
+        for (let i = 0; i < recent_rated_scores.length; i++) {
+            recent_show_scores += `
+    <div class="song-result-unit future" id="${recent_rated_scores[i]['title']}">
+        <div onclick="modifyPlayResult(${i+30})" class="song-illustration-container"><img class="song-illustration"
+                src=https://webassets.lowiro.com/${recent_rated_scores[i]['bg']}.jpg?v=323")}"></div>
+        <div class="song-information">
+            <div class="song-playrating">${recent_rated_scores[i]['rating']}</div>
+            <div class="song-constant">${recent_rated_scores[i]['difficulty']}</div>
+            <div class="song-rank">#${i + 1+30}</div>
+        </div>
+        <div class="song-name">${recent_rated_scores[i]['title']}</div>
+        <div class="song-score">${recent_rated_scores[i]['score']}</div>
+        <div class="song-items">
+        </div><img class="song-ranking-image" src="static/b30_image/rank/${getString(recent_rated_scores[i]['score'])}.png">
+    </div>`
+        }
+        console.log(recent_show_scores)
+
+        const b30data = document.querySelector("#b30-data")
+        b30data.innerHTML = best_show_scores + b30data.innerHTML + recent_show_scores
+    })
+
+
+    axios(
+        {
+            method: 'GET',
+            url: '/rating',
+        }
+    ).then(response => {
+        //{"best":11.999,"rating":12.04,"recent":12.162}
+        document.querySelector("#ptt-max").innerHTML = `Max : <span>${response.data.rating}</span>`
+        document.querySelector("#ptt-b30").innerHTML = `B30 : <span>${response.data.best}</span>`
+        document.querySelector("#ptt-r10").innerHTML = `R10 : <span>${response.data.recent}</span>`
+        document.querySelector("#potential-value").textContent = response.data.rating
+    })
+
+
+    document.querySelector("#copyright span:nth-child(2)").textContent = new Date().toLocaleString()
+    setInterval(function (){
+        document.querySelector("#copyright span:nth-child(2)").textContent = new Date().toLocaleString()
+    },1000)
+
+
+
+</script>
+
+</html>
