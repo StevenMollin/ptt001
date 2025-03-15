@@ -61,6 +61,7 @@ function rating_calc(max,best,recent,containerId){
         <h1>PTT001</h1>
         <h2>Rating:${max} Best:${best} Recent:${recent}</h2>
         <button onclick="capture()" class="button">保存为图片</button>
+        <button onclick="window.location.href='../b30'" class="button">生成b30</button>
         `;
 }
 

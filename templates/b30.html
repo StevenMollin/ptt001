@@ -24,7 +24,7 @@
                         <div id="iconblur">
                             <img src="static/b30_image/blur.png">
                         </div>
-                        <div id="icon" onclick="displayWindow('setting-window')">
+                        <div id="icon" onclick="picture()">
                             <img src="static/b30_image/2u_icon.webp">
                         </div>
                         <div id="potential-container">
@@ -75,7 +75,7 @@
 </body>
 <script src="static/http_cdn.jsdelivr.net_npm_axios_dist_axios.js"></script>
 <script src="static/imageToBase64.js"></script>
-
+<script src="../static/html2canvas.min.js"></script>
 <script>
     function getString(value) {
         if (value > 10000000) {
@@ -162,6 +162,29 @@
         document.querySelector("#copyright span:nth-child(2)").textContent = new Date().toLocaleString()
     },1000)
 
+    function picture(){
+        const options = {
+            allowTaint: false,
+            useCORS: true,
+            async:true,
+            scale: 2,
+            logging: false
+        };
+
+
+        html2canvas(document.body, options).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = `best30.png`;
+            link.href = imgData;
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }).catch(err => {
+            console.error('截图失败:', err);
+        });
+    }
 
 
 </script>
