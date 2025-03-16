@@ -24,13 +24,14 @@ def modify(file):
         del temp["modifier"],temp["perfect_count"],temp["near_count"],temp["miss_count"],temp["clear_type"]
 
         temp["title"] = temp["title"]["en"]
-        temp["rating"] = temp["rating"]
+        temp["rating"] = round(temp["rating"],4)
         temp["difficulty"] = diff[str(temp["difficulty"])]
 
     for temp in file["recent_rated_scores"]:
         del temp["modifier"],temp["perfect_count"],temp["near_count"],temp["miss_count"],temp["clear_type"]
 
         temp["title"] = temp["title"]["en"]
+        temp["rating"] = round(temp["rating"], 4)
         temp["difficulty"] = diff[str(temp["difficulty"])]
 
     return file

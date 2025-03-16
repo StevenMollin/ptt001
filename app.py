@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from calculator import online_sheet, online_rating
+from calculator import online_rating
 from flask_cors import CORS
 
 from getfile import modify, get_file

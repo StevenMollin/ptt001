@@ -42,7 +42,7 @@ function renderTable(scores, containerId, title) {
     ${scores.map((score,index) => `
                     <tr>
                          <td class="index">${index+1}</td>
-                         <td><img src="https://webassets.lowiro.com/${score.bg}.jpg?v=323"></td>
+                         <td><img src="../static/song_img/${score.song_id}.jpg"></td>
                          <td>${score.title}</td>
                          <td class="difficulty">${score.difficulty}</td>
                          <td class="rating">${score.rating.toFixed(2)}</td>
@@ -60,32 +60,7 @@ function rating_calc(max,best,recent,containerId){
     container.innerHTML = `
         <h1>PTT001</h1>
         <h2>Rating:${max} Best:${best} Recent:${recent}</h2>
-        <button onclick="capture()" class="button">保存为图片</button>
         <button onclick="window.location.href='../b30'" class="button">生成b30</button>
         `;
-}
-
-function capture() {
-    const options = {
-        allowTaint: false,
-        useCORS: true,
-        async:true,
-        scale: 2,
-        logging: false
-    };
-
-
-    html2canvas(document.body, options).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
-        const link = document.createElement('a');
-        link.download = `jietu.png`;
-        link.href = imgData;
-
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }).catch(err => {
-        console.error('截图失败:', err);
-    });
 }
 window.onload = fetchData;
