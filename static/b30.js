@@ -80,11 +80,11 @@ axios(
 })
 
 
-document.querySelector("#copyright span:nth-child(2)").textContent = new Date().toLocaleString()
+//document.querySelector("#copyright span:nth-child(2)").textContent = new Date().toLocaleString()
 
-setInterval(function (){
-    document.querySelector("#copyright span:nth-child(2)").textContent = new Date().toLocaleString()
-},1000)
+//setInterval(function (){
+//    document.querySelector("#copyright span:nth-child(2)").textContent = new Date().toLocaleString()
+//},1000)
 
 function picture(){
     const options = {
@@ -114,3 +114,14 @@ function picture(){
     document.querySelector("#mainCapture").style.height="50px"
 
 }
+
+function span(){
+    const control = document.getElementById("copyright");
+    let date = new Date();
+
+    control.innerHTML=`
+        <span>${date.toLocaleString()}@</span>
+        <span contenteditable="true">点击编辑自定义内容</span>
+    `;
+}
+window.onload=span;
