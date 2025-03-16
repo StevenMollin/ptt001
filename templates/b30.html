@@ -8,17 +8,15 @@
     <style>
         @import "static/b30.css";
     </style>
-
     <script src="../static/http_cdn.jsdelivr.net_npm_axios_dist_axios.js"></script>
     <script src="../static/imageToBase64.js"></script>
     <script src="../static/html2canvas.min.js"></script>
-    <script src="../static/b30.js"></script>
 </head>
-
-<body >
-    <div id="mainCapture" style="height: 50px">
+<body>
+    <div id="windowsBox" style="width: 500px;height: 900px; overflow: hidden;">
+        <div id="mainCapture" style="height: 50px;transform-origin: 0px 0px; transform: scale(0.36);">
         <div id="container">
-            <div id="background" style="background-image: url(static/b30_image/Background_scenery_Chap9.jpg); height: 3400px;">
+            <div id="background" style="background-image: url(static/b30_image/Background.jpg); height: 3400px;">
             </div>
             <h1 id="notice" hidden="hidden">若页面显示不完整，请刷新几次</h1>
             <div id="info-display">
@@ -72,7 +70,11 @@
         </div>
 
         <div id="copyright">
+            <span></span>
+            <span contenteditable="true">点击编辑自定义内容</span>
         </div>
     </div>
+    </div>
 </body>
+    <script src="../static/b30.js"></script>
 </html>
