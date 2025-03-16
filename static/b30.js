@@ -80,11 +80,7 @@ axios(
 })
 
 
-//document.querySelector("#copyright span:nth-child(2)").textContent = new Date().toLocaleString()
 
-//setInterval(function (){
-//    document.querySelector("#copyright span:nth-child(2)").textContent = new Date().toLocaleString()
-//},1000)
 
 function picture(){
     const options = {
@@ -95,11 +91,12 @@ function picture(){
         logging: false
     };
     mainCapture=document.querySelector("#mainCapture")
+    background=document.querySelector("#background")
     mainCapture.style.height="3600px"
-    mainCapture.style.backgroundImage="url(static/b30_image/Background_scenery_Chap9.jpg)"
+    mainCapture.style.backgroundImage="url(static/b30_image/Background.jpg)"
+    background.style.backgroundImage=""
 
-
-    html2canvas(document.body, options).then(canvas => {
+    html2canvas(document.querySelector("#mainCapture"), options).then(canvas => {
         const imgData = canvas.toDataURL('image/png');
         const link = document.createElement('a');
         link.download = `best30.png`;
@@ -112,16 +109,24 @@ function picture(){
         console.error('截图失败:', err);
     });
     document.querySelector("#mainCapture").style.height="50px"
+    mainCapture.style.backgroundImage=""
+    background.style.backgroundImage="url(static/b30_image/Background.jpg)"
 
 }
 
-function span(){
-    const control = document.getElementById("copyright");
-    let date = new Date();
+document.querySelector("#copyright span:first-child").textContent = new Date().toLocaleString()
+setInterval(function (){
+   document.querySelector("#copyright span:first-child").textContent = new Date().toLocaleString()
+},1000)
 
-    control.innerHTML=`
-        <span>${date.toLocaleString()}@</span>
-        <span contenteditable="true">点击编辑自定义内容</span>
-    `;
+windowsBox=document.querySelector("#windowsBox")
+mainCapture=document.querySelector("#mainCapture")
+
+function resize_windows() {
+    windowsBox.style="width:"+window.innerWidth+"px;height:"+window.innerHeight+"px;"
+    mainCapture.style.transform= `scale(${window.innerWidth/1700})`
 }
-window.onload=span;
+
+window.addEventListener('resize', resize_windows, 200); // 200ms 内只触发一次
+
+resize_windows()
