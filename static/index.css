@@ -65,7 +65,7 @@ tr:hover {
     color: #7f8c8d;
 }
 
-.button {
+button {
     margin: 10px 0;
     padding: 15px 30px;
     font-size: large;

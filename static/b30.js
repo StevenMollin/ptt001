@@ -17,7 +17,6 @@ function getString(value) {
     }
 }
 
-
 // 截图功能
 function picture() {
     const options = {

@@ -21,7 +21,6 @@ async function fetchData() {
     }
 }
 
-
 function renderTable(scores, containerId, title) {
     const container = document.getElementById(containerId);
     container.innerHTML = `
@@ -55,12 +54,18 @@ function renderTable(scores, containerId, title) {
             `;
         }
 
+function clean_cache(){
+    //缓存功能
+}
+
 function rating_calc(max,best,recent,containerId){
     const container = document.getElementById(containerId);
     container.innerHTML = `
         <h1>PTT001</h1>
         <h2>Rating:${max} Best:${best} Recent:${recent}</h2>
-        <button onclick="window.location.href='../b30'" class="button">生成b30</button>
+        <button onclick="window.location.href='../b30'">生成b30</button>
+        <button onclick="clean_cache()">清除缓存</button>
         `;
 }
+
 window.onload = fetchData;
