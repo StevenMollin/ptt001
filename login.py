@@ -19,4 +19,7 @@ def login_api(username:str,password:str):
     if json.loads(response.text)['isLoggedIn']:
         return response.cookies.get('sid')
     else:
-        return None
+        return "账号或密码错误"
+
+if __name__ == '__main__':
+    print(login_api("",""))
