@@ -112,7 +112,7 @@ window.addEventListener('resize', resize_windows, 200); // 200ms 内只触发一
 
         const ratingData = JSON.parse(localStorage.getItem("rating"))
         //{"best":11.999,"rating":12.04,"recent":12.162}
-        document.querySelector("#ptt-max").innerHTML = `Max : <span>${ratingData['rating']}</span>`
+        document.querySelector("#ptt-max").innerHTML = `PTT : <span>${ratingData['rating']}</span>`
         document.querySelector("#ptt-b30").innerHTML = `B30 : <span>${ratingData['best']}</span>`
         document.querySelector("#ptt-r10").innerHTML = `R10 : <span>${ratingData['recent']}</span>`
         document.querySelector("#potential-value").textContent = ratingData['rating']
