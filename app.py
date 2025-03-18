@@ -27,9 +27,13 @@ def b30():
 
 @app.route('/login',methods=['POST'])
 def login():
-    post_json=request.get_json()
-    print(post_json['username'],post_json['password'])
-    sid=login_api(post_json['username'],post_json['password'])
+    user = request.form.get('user')
+    password = request.form.get('password')
+    print(user,password)
+    try :
+        sid=login_api(user,password)
+    except Exception as e:
+        return '账号或密码密码错误',404
     return sid
 
 if __name__ == '__main__':
